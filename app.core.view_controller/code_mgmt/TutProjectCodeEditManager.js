@@ -1,5 +1,5 @@
 /**
- * Created by miaomiao on 2016/3/13.
+ * Created by miaomiao on 2016/3/8.
  */
 var codeEditService = require('../../app.core.model/code_mgmt/TutProjectCodeEditService');
 var fs = require('fs');
@@ -26,6 +26,7 @@ Controller.prototype.doSaveCodeFile = function(req,res) {
     //var path1 = './_test/readFile.js';
 
     var string = req.body.fileContent;
+    console.log(string);
     var path = req.body.filePath;
     //var string = 'hello11111';
     //var buf = new Buffer(string,'utf8');

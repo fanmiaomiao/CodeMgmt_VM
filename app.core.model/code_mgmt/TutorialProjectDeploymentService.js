@@ -1,5 +1,8 @@
+/**
+ * Created by chen on 2016/3/2.
+ */
 var fs = require('fs');
-//var message = require('../../app.util/messageGenerator.js');
+var message = require('../../app.util/messageGenerator.js');
 
 exports.retrieveProjectFileStructure = function (tpId, next) {
     // todo return json : project_file_structure_data

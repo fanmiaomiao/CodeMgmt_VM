@@ -1,17 +1,10 @@
 /**
- * Created by miaomiao on 2016/3/13.
+ * Created by miaomiao on 2016/3/8.
  */
+
 var fs = require('fs');
 var StringDecoder = require('string_decoder').StringDecoder;
 var decoder = new StringDecoder('utf8');
-
-var net = require('net');
-var HOST = '192.168.1.70';
-var PORT = 2433;
-var chanelToMaster = new net.Socket();
-chanelToMaster.connect(PORT,HOST,function(){
-    console.log('Connected to:' + HOST +":" +PORT);
-});
 
 exports.openCodeFile = function (path,next) {
     var buffer = '';
@@ -21,7 +14,6 @@ exports.openCodeFile = function (path,next) {
     });
     fileReadStream.on('end', function () {
         next(buffer);
-        //chanelToMaster.write(data);
     });
 
 };
