@@ -12,7 +12,7 @@ function ExampleController(router) {
 
 ExampleController.prototype.doExample = function (req,res) {
     var path = req.query.tpId;
-    console.log(path);
+    //console.log(path);
     exampleService.example (path,function(data){
         res.send(JSON.stringify(data));
     });

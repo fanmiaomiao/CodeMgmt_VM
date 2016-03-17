@@ -16,12 +16,13 @@ var bodyParser = require('body-parser');
 
 var app = require('./config');
 var routes = require('./routes/root');
+var serviceConfig = require('./config.json');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '2434');
+var port = normalizePort(process.env.PORT || serviceConfig.port[serviceConfig.runMode]);
 app.set('port', port);
 
 /**

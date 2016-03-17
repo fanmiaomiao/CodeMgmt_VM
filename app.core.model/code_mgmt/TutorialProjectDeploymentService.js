@@ -20,7 +20,7 @@ exports.retrieveProjectFileStructure = function (tpId, next) {
             if (fs.statSync(path + '/' + item).isDirectory()) {
                 fileLevel = {
                     text: item,
-                    type: 'Folder',
+                    type: 'folder',
                     children: handleFolder(path + '/' + item)
                 };
             } else {
@@ -43,6 +43,7 @@ exports.retrieveProjectFileStructure = function (tpId, next) {
     if (project_file_structure_data) {
         next(message.genSimpSuccessMsg('parse success', project_file_structure_data));
     } else {
+        //todo wenyan replace the null detail error message
         next(message.genSimpFailedMsg('error', null));
     }
 };

@@ -1,18 +1,23 @@
-/**
+﻿/**
  * Created by miaomiao on 2016/3/2.
  */
 var net = require('net');
-var HOST = '192.168.1.70';
-var PORT = 2433;
+var HOST = '127.0.0.1';
+var PORT = 2434;
 var chanelToMaster = new net.Socket();
 chanelToMaster.connect(PORT, HOST, function() {
     console.log('CONNECTED TO: ' + HOST + ':' + PORT);
 });
-
+chanelToMaster.on('disconnect',function(data) {
+   console.log('server disconnected!');
+});
+chanelToMaster.on('error',function(data) {
+   console.log('ERROR:'+data);
+});
 var spawn = require('child_process').spawn;
 var StringDecoder = require('string_decoder').StringDecoder;
 var decoder = new StringDecoder('utf8');
-
+var message = require('../../app.util/messageGenerator.js');
 var http = require('http');
 var server = http.createServer();
 
@@ -34,8 +39,8 @@ exports.startProject = function(tpId,path,next) {
 
     //1.获取项目启动路径
     var processParameterMap = {
-        uuid1 : {path:'./app.core.model/code_mgmt/_test/uuid1/'+path , port:autoPort},
-        uuid2 : {path:'./app.core.model/code_mgmt/_test/uuid2/app.js', port:autoPort}
+        uuid1 : {path:'./app.core.model/code_mgmt/_test/6b0b84f6-f3ef-4706-860b-27077dadc382/'+path , port:autoPort},
+        uuid2 : {path:'./app.core.model/code_mgmt/_test/6b0b84f6-f3ef-4706-860b-27077dadc382/'+path, port:autoPort}
     };
 
     var processParameter = processParameterMap[tpId];
@@ -65,7 +70,7 @@ exports.startProject = function(tpId,path,next) {
 
     //3.将启动项目的子进程放到池里
     childProcessMap[tpId] = childProcess;
-    next(autoPort);
+    next(message.genSimpSuccessMsg('startProject',JSON.parse(autoPort)));
 };
 
 // 中止 tpId

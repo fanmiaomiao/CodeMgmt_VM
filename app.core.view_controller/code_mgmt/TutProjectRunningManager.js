@@ -20,7 +20,6 @@ function Controller(router) {
 Controller.prototype.doRunProject = function(req,res){
     var tpId = req.query.tpId;
     var path = req.query.filePath;
-
     childProcessService.startProject(tpId,path,function(data) {
         var jsonData = JSON.stringify(data);
         res.send(jsonData);
