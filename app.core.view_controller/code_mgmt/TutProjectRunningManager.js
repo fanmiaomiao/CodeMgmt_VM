@@ -14,13 +14,26 @@ function Controller(router) {
     router.get('/stopProject', function (req, res) {
         me.doStopProject(req, res);
     });
+    router.get('/restartProject', function (req, res) {
+        me.doRestartProject(req, res);
+    });
 
 };
 
 Controller.prototype.doRunProject = function(req,res){
     var tpId = req.query.tpId;
     var path = req.query.filePath;
+
     childProcessService.startProject(tpId,path,function(data) {
+        var jsonData = JSON.stringify(data);
+        res.send(jsonData);
+    });
+};
+Controller.prototype.doRestartProject = function(req,res){
+    var tpId = req.query.tpId;
+    var path = req.query.filePath;
+
+    childProcessService.restartProject(tpId,path,function(data) {
         var jsonData = JSON.stringify(data);
         res.send(jsonData);
     });
